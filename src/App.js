@@ -4,16 +4,17 @@ import Logo from "./components/Logo";
 import Cards from "./components/Cards";
 import Footer from "./components/Footer";
 import { useState } from "react";
+import deck from "./components/deck";
 
 export default function App() {
-  const [cardQuanty, setCardQuanty] = useState(0)
+  const cardQuanty = deck.length
   const [answered, setAnswered] = useState(0)
 
 
   return (
     <ScreenContainer>
       <Logo/>
-      <Cards />
+      <Cards answered={answered} setAnswered={setAnswered}/>
       <Footer cardQuanty={cardQuanty} answered={answered}/>
     </ScreenContainer>
   );

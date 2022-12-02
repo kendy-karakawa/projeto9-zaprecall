@@ -11,7 +11,7 @@ const AMARELO = "#FF922E"
 const VERMELHO = "#FF3030"
 const CINZA = "#333333"
 
-export default function Card({ indici, question, answer }) {
+export default function Card({ indici, question, answer,answered, setAnswered}) {
 
 
   const [exibirBotao, setExibirBotao] = useState(true);
@@ -20,12 +20,17 @@ export default function Card({ indici, question, answer }) {
   const [imgBotao, setImgBotao] = useState(setaPlay)
   const [textDecoration, setTextDecoration] = useState("none")
   const [textColor, setTextcolor] = useState(CINZA)
+  const [botaoSelecionados, setBotaoSelecionados] = useState([])
   
   
 
   function selectBotao() {
-    setExibirBotao(false);
-    setExibirPergunta(true);
+    if(!botaoSelecionados.includes(indici)){
+      setBotaoSelecionados([...botaoSelecionados, indici])
+      setExibirBotao(false);
+      setExibirPergunta(true);
+    }
+    
   }
 
   function selectPergunta() {
@@ -39,12 +44,14 @@ export default function Card({ indici, question, answer }) {
     setImgBotao(img)
     setExibirResposta(false);
     setExibirBotao(true);
+    setAnswered(answered + 1)
+    console.log(answered)
   }
 
   return (
     <>
       {exibirBotao && (
-        <Botao onClick={ selectBotao} textColor={textColor} textDecoration={textDecoration}>
+        <Botao onClick={()=> selectBotao(indici)} textColor={textColor} textDecoration={textDecoration}>
           <p>{`Pergunta ${indici}`}</p>
           <img src={imgBotao} alt="icone" />
         </Botao>
