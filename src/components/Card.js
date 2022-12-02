@@ -1,15 +1,27 @@
 import { useState } from "react";
 import styled from "styled-components";
 import setaPlay from "../assets/img/seta_play.png";
+import certo from "../assets/img/icone_certo.png"
+import erro from "../assets/img/icone_erro.png"
+import quase from "../assets/img/icone_quase.png"
 import virar from "../assets/img/seta_virar.png";
+
+const VERDE = "#2FBE34"
+const AMARELO = "#FF922E"
+const VERMELHO = "#FF3030"
+const CINZA = "#333333"
 
 export default function Card({ indici, question, answer }) {
 
 
   const [exibirBotao, setExibirBotao] = useState(true);
-  const [exibirBotaoFinalizado, setExibirBotaoFinalizado] = useState(false);
   const [exibirPergunta, setExibirPergunta] = useState(false);
   const [exibirResposta, setExibirResposta] = useState(false);
+  const [imgBotao, setImgBotao] = useState(setaPlay)
+  const [textDecoration, setTextDecoration] = useState("none")
+  const [textColor, setTextcolor] = useState(CINZA)
+  
+  
 
   function selectBotao() {
     setExibirBotao(false);
@@ -21,20 +33,22 @@ export default function Card({ indici, question, answer }) {
     setExibirResposta(true);
   }
 
-  function red(){
-
+  function botaoFinalizado(color, img){
+    setTextDecoration("line-through")
+    setTextcolor(color)
+    setImgBotao(img)
+    setExibirResposta(false);
+    setExibirBotao(true);
   }
 
   return (
     <>
       {exibirBotao && (
-        <Botao onClick={ selectBotao}>
+        <Botao onClick={ selectBotao} textColor={textColor} textDecoration={textDecoration}>
           <p>{`Pergunta ${indici}`}</p>
-          <img src={setaPlay} alt="setaPlay" />
+          <img src={imgBotao} alt="icone" />
         </Botao>
       )}
-
-      
 
       {exibirPergunta && (
         <Pergunta>
@@ -47,9 +61,9 @@ export default function Card({ indici, question, answer }) {
         <Resposta>
           <p>{answer}</p>
           <ContainerButton>
-            <ButtonRed>Não lembrei</ButtonRed>
-            <ButtonYellow>Quase não lembrei</ButtonYellow>
-            <ButtonGreen>Zap!</ButtonGreen>
+            <ButtonRed onClick={()=> botaoFinalizado(VERMELHO, erro)} >Não lembrei</ButtonRed>
+            <ButtonYellow onClick={()=> botaoFinalizado(AMARELO,quase)}>Quase não lembrei</ButtonYellow>
+            <ButtonGreen onClick={()=> botaoFinalizado(VERDE,certo)}>Zap!</ButtonGreen>
           </ContainerButton>
         </Resposta>
       )}
@@ -74,8 +88,8 @@ const Botao = styled.div`
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
-    color: #333333;
-    text-decoration:${"line-through" };
+    color: ${props=> props.textColor};
+    text-decoration:${props=> props.textDecoration};
   }
 `;
 
