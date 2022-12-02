@@ -1,7 +1,15 @@
+
 import styled from "styled-components";
 
-export default function Footer() {
-  return <FooterConcluidos>0/4 CONCLUÍDOS</FooterConcluidos>;
+export default function Footer({cardQuanty,answered}) {
+  
+
+  return (
+  <FooterConcluidos>
+    {`${answered}/${cardQuanty} CONCLUÍDOS`}
+  </FooterConcluidos>
+  
+  )
 }
 
 const FooterConcluidos = styled.div`
