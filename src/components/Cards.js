@@ -6,7 +6,7 @@ export default function Cards({answered, setAnswered, setListaIMG}) {
     <ul>
       {deck.map((deck) => (
         <Card
-          data-test="flashcard"
+          
           key={deck.key}
           indici={deck.key}
           question={deck.question}

@@ -21,7 +21,7 @@ export default function Card({ indici, question, answer,answered, setAnswered}) 
   const [textDecoration, setTextDecoration] = useState("none")
   const [textColor, setTextcolor] = useState(CINZA)
   const [botaoSelecionados, setBotaoSelecionados] = useState([])
-  
+  const [dataTextIcon, setDataTextIcon] = useState("play-btn")
   
   
 
@@ -39,23 +39,25 @@ export default function Card({ indici, question, answer,answered, setAnswered}) 
     setExibirResposta(true);
   }
 
-  function botaoFinalizado(color, img){
+  function botaoFinalizado(color, img, icon){
     setTextDecoration("line-through")
     setTextcolor(color)
     setImgBotao(img)
     setExibirResposta(false);
     setExibirBotao(true);
     setAnswered(answered + 1)
+    setDataTextIcon(icon)
     
   }
 
   return (
     <>
+    <div data-test="flashcard">
       {exibirBotao && (
         <Botao onClick={()=> selectBotao(indici)} textColor={textColor} textDecoration={textDecoration}>
           <p data-test="flashcard-text" >{`Pergunta ${indici}`}</p>
           <img src={imgBotao} alt="icone" 
-          data-test="play-btn no-icon zap-icon partial-icon "/>
+          data-test={dataTextIcon}/>
         </Botao>
       )}
 
@@ -70,12 +72,13 @@ export default function Card({ indici, question, answer,answered, setAnswered}) 
         <Resposta>
           <p data-test="flashcard-text" >{answer}</p>
           <ContainerButton>
-            <ButtonRed onClick={()=> botaoFinalizado(VERMELHO, erro)} data-test="no-btn">Não lembrei</ButtonRed>
-            <ButtonYellow onClick={()=> botaoFinalizado(AMARELO,quase)} ata-test="partial-btn">Quase não lembrei</ButtonYellow>
-            <ButtonGreen onClick={()=> botaoFinalizado(VERDE,certo)} data-test="zap-btn">Zap!</ButtonGreen>
+            <ButtonRed onClick={()=> botaoFinalizado(VERMELHO, erro,"no-icon")} data-test="no-btn">Não lembrei</ButtonRed>
+            <ButtonYellow onClick={()=> botaoFinalizado(AMARELO,quase,"partial-icon")} ata-test="partial-btn">Quase não lembrei</ButtonYellow>
+            <ButtonGreen onClick={()=> botaoFinalizado(VERDE,certo, "zap-icon")} data-test="zap-btn">Zap!</ButtonGreen>
           </ContainerButton>
         </Resposta>
       )}
+      </div>
     </>
   );
 }
