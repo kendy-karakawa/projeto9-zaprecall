@@ -23,6 +23,7 @@ export default function Card({ indici, question, answer,answered, setAnswered}) 
   const [botaoSelecionados, setBotaoSelecionados] = useState([])
   
   
+  
 
   function selectBotao() {
     if(!botaoSelecionados.includes(indici)){
@@ -45,32 +46,33 @@ export default function Card({ indici, question, answer,answered, setAnswered}) 
     setExibirResposta(false);
     setExibirBotao(true);
     setAnswered(answered + 1)
-    console.log(answered)
+    
   }
 
   return (
     <>
       {exibirBotao && (
         <Botao onClick={()=> selectBotao(indici)} textColor={textColor} textDecoration={textDecoration}>
-          <p>{`Pergunta ${indici}`}</p>
-          <img src={imgBotao} alt="icone" />
+          <p data-test="flashcard-text" >{`Pergunta ${indici}`}</p>
+          <img src={imgBotao} alt="icone" 
+          data-test="play-btn no-icon zap-icon partial-icon "/>
         </Botao>
       )}
 
       {exibirPergunta && (
-        <Pergunta>
+        <Pergunta data-test="flashcard-text" >
           {question}
-          <img src={virar} alt="virar" onClick={selectPergunta} />
+          <img src={virar} alt="virar" onClick={selectPergunta} data-test="turn-btn" />
         </Pergunta>
       )}
 
       {exibirResposta && (
         <Resposta>
-          <p>{answer}</p>
+          <p data-test="flashcard-text" >{answer}</p>
           <ContainerButton>
-            <ButtonRed onClick={()=> botaoFinalizado(VERMELHO, erro)} >Não lembrei</ButtonRed>
-            <ButtonYellow onClick={()=> botaoFinalizado(AMARELO,quase)}>Quase não lembrei</ButtonYellow>
-            <ButtonGreen onClick={()=> botaoFinalizado(VERDE,certo)}>Zap!</ButtonGreen>
+            <ButtonRed onClick={()=> botaoFinalizado(VERMELHO, erro)} data-test="no-btn">Não lembrei</ButtonRed>
+            <ButtonYellow onClick={()=> botaoFinalizado(AMARELO,quase)} ata-test="partial-btn">Quase não lembrei</ButtonYellow>
+            <ButtonGreen onClick={()=> botaoFinalizado(VERDE,certo)} data-test="zap-btn">Zap!</ButtonGreen>
           </ContainerButton>
         </Resposta>
       )}
