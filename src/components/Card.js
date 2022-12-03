@@ -73,7 +73,7 @@ export default function Card({ indici, question, answer,answered, setAnswered}) 
           <p data-test="flashcard-text" >{answer}</p>
           <ContainerButton>
             <ButtonRed onClick={()=> botaoFinalizado(VERMELHO, erro,"no-icon")} data-test="no-btn">Não lembrei</ButtonRed>
-            <ButtonYellow onClick={()=> botaoFinalizado(AMARELO,quase,"partial-icon")} ata-test="partial-btn">Quase não lembrei</ButtonYellow>
+            <ButtonYellow onClick={()=> botaoFinalizado(AMARELO,quase,"partial-icon")} data-test="partial-btn">Quase não lembrei</ButtonYellow>
             <ButtonGreen onClick={()=> botaoFinalizado(VERDE,certo, "zap-icon")} data-test="zap-btn">Zap!</ButtonGreen>
           </ContainerButton>
         </Resposta>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import GlobalStyle from "./components/GlobalStyle";
 import Start from "./components/Start";
 import ZapRecall from "./components/ZapRecall";
 
@@ -9,6 +10,7 @@ export default function App() {
 
   return(
     <>
+    <GlobalStyle/>
     {renderizarZap && <ZapRecall/>}
     
     {renderizarStart && 
