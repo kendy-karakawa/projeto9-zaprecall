@@ -5,7 +5,7 @@ export default function Footer({cardQuanty,answered}) {
   
 
   return (
-  <FooterConcluidos>
+  <FooterConcluidos data-test="footer" >
     {`${answered}/${cardQuanty} CONCLUÍDOS`}
   </FooterConcluidos>
   
